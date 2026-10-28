@@ -53,14 +53,14 @@ export function useCar(opts: UseCarOptions) {
   }, [rapier]);
 
   const onCollisionEnter = useCallback(
-    ({ other }: { other: { rigidBody: RapierRigidBody | null } }) => {
+    ({ other }: { other: { rigidBody?: RapierRigidBody | null } }) => {
       const id = idRef.current;
       const self = bodyRef.current;
       if (id == null || !self) return;
       const entry = cars.get(id);
       if (!entry || !entry.alive) return;
 
-      const otherBody = other.rigidBody;
+      const otherBody = other.rigidBody ?? null;
       const mv = self.linvel();
       const ov = otherBody ? otherBody.linvel() : ZERO;
       const relSpeed = Math.hypot(
