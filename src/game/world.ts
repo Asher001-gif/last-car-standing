@@ -44,8 +44,8 @@ export function registerCar(opts: {
   color: string;
   spawn: Spawn;
   body: RapierRigidBody | null;
-  brain?: BotBrain;
-  onDeath?: () => void;
+  brain?: BotBrain | undefined;
+  onDeath?: (() => void) | undefined;
 }): number {
   const id = nextId++;
   const entry: CarEntry = {
